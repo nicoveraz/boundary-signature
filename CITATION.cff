@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this software or its findings, please cite it."
+title: "boundary-signature: A Measurement Protocol for Per-Step Belief Monitoring in Chain-of-Thought Reasoning"
+authors:
+  - family-names: "Vera Zúñiga"
+    given-names: "Nicolás"
+    affiliation: "Quetru Ltda."
+version: 0.1.0
+date-released: "2026-06-12"
+license: Apache-2.0
+repository-code: "https://github.com/nicoveraz/boundary-signature"
+keywords:
+  - uncertainty quantification
+  - chain-of-thought
+  - selective prediction
+  - large language models

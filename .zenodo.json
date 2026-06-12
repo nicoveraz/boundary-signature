@@ -1,0 +1,18 @@
+{
+  "title": "boundary-signature: A Measurement Protocol for Per-Step Belief Monitoring in Chain-of-Thought Reasoning",
+  "description": "Research code, data, paper, and pre-registration trail for a token-probability measurement protocol that reads an LLM's answer distribution at each chain-of-thought step. Per-step mean entropy is a domain-portable deferral signal (AUC 0.686 MedQA, 0.664 MMLU law) under single-model, single-pass, 4-bit, black-box constraints; a systematic pre-registered sweep shows no cheap trajectory-dynamics, perturbation, verbalised-confidence, or richer-distribution feature complements it. Includes embedding-stripped cached measurements that recompute every reported number without an LLM.",
+  "upload_type": "software",
+  "creators": [
+    { "name": "Vera Zuniga, Nicolas", "affiliation": "Quetru Ltda." }
+  ],
+  "license": "Apache-2.0",
+  "access_right": "open",
+  "keywords": [
+    "uncertainty quantification",
+    "chain-of-thought",
+    "selective prediction",
+    "large language models",
+    "calibration",
+    "pre-registration"
+  ]
+}

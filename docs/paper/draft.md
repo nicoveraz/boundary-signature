@@ -2,7 +2,7 @@
 
 **Status**: full draft, all sections (§1-§9) populated; pending PI
 review pass and venue formatting.
-**Authors**: TBD.
+**Authors**: Nicolás Vera Zúñiga (Quetru Ltda.). Co-authors TBD.
 **Date**: 2026-05-07 (started); 2026-06-12 (full-draft revision
 integrating the parallel-axis and signal-exhaustion results).
 **Empirical evidence base**: stage-4a MedQA-USMLE N=1273 replication
@@ -1023,6 +1023,15 @@ median entropy stratified by correct/wrong:
 | 4 | 730 | 0.050 | 729 | 0.196 | +0.146 |
 | 5 | 534 | 0.024 | 527 | 0.072 | +0.048 |
 
+![Figure 1](../figures/entropy_trajectory.png)
+
+**Figure 1.** Median per-step answer entropy on MedQA-USMLE (N=1273),
+stratified by eventual correctness. The wrong–correct gap is largest at
+the prior (step 0; +0.48 bits) and narrows monotonically as reasoning
+resolves — the same phenomenon the table above reports on
+professional_law. Both groups collapse toward zero entropy as the model
+commits; the prior already separates them.
+
 The wrong-correct entropy gap at the prior is +0.354 bits,
 narrowing monotonically through reasoning steps to +0.048 bits by
 position 5. Both groups converge toward zero entropy as reasoning
@@ -1264,6 +1273,28 @@ feature tested) but empirically *empty* (standalone 0.538, near
 chance). The one feature on a truly different object carries no
 correctness information; the one with signal is not on a different
 object after all.
+
+**Table 6.** Incremental sign-aware AUC over ``mean_entropy`` for every
+cheap signal tested (MedQA N=1273; richer-distribution row N=200).
+Paired-bootstrap 95% CIs; only cross-quantization disagreement excludes
+zero, and it requires a second quantized model.
+
+| Signal | Δ AUC over mean_entropy | 95% CI |
+|---|---|---|
+| Cross-quantization disagreement (§5.7) | **+0.031** | [+0.017, +0.045] |
+| Trajectory dynamics (composite) | +0.005 | [−0.008, +0.019] |
+| Logit-noise perturbation (one model) | +0.004 | [−0.001, +0.009] |
+| 2D serial × parallel interaction (§5.7) | +0.001 | [−0.003, +0.005] |
+| Verbalised confidence | −0.001 | [−0.003, +0.001] |
+| Richer distribution (varentropy / full-vocab / EPR) | −0.016 | [−0.035, +0.000] |
+
+![Figure 2](../figures/signal_map.png)
+
+**Figure 2.** Incremental AUC over ``mean_entropy`` for each cheap signal
+in Table 6. Bars are point estimates; whiskers are 95% CIs. Only
+cross-quantization disagreement (highlighted) clears zero; every other
+interval straddles it, and the richest-distribution composite is slightly
+negative.
 
 **The combined picture.** Across six probes — trajectory dynamics,
 logit perturbation, verbalised confidence, richer-distribution
