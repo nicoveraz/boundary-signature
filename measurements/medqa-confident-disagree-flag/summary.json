@@ -1,0 +1,67 @@
+{
+  "Qwen (discovery)": {
+    "name": "Qwen (discovery)",
+    "base_rate": 0.40455616653574233,
+    "cells": {
+      "confident&disagree": {
+        "wrong": 0.4883720930232558,
+        "lo": 0.34617209277756,
+        "hi": 0.6324793623392592,
+        "n": 43
+      },
+      "confident&agree": {
+        "wrong": 0.2411467116357504,
+        "lo": 0.2084525071228011,
+        "hi": 0.2771731597207969,
+        "n": 593
+      },
+      "uncertain&disagree": {
+        "wrong": 0.610909090909091,
+        "lo": 0.5521349992820538,
+        "hi": 0.6666271940205238,
+        "n": 275
+      },
+      "uncertain&agree": {
+        "wrong": 0.505524861878453,
+        "lo": 0.45423343295239177,
+        "hi": 0.5567002607554862,
+        "n": 362
+      }
+    },
+    "lift": 0.24722538138750538,
+    "validates_criteria": false
+  },
+  "Llama (held-out)": {
+    "name": "Llama (held-out)",
+    "base_rate": 0.4344069128043991,
+    "cells": {
+      "confident&disagree": {
+        "wrong": 0.6567164179104478,
+        "lo": 0.5373244120046358,
+        "hi": 0.7591115804066028,
+        "n": 67
+      },
+      "confident&agree": {
+        "wrong": 0.23374340949033393,
+        "lo": 0.2008256479103879,
+        "hi": 0.27023231994669517,
+        "n": 569
+      },
+      "uncertain&disagree": {
+        "wrong": 0.6254980079681275,
+        "lo": 0.5641522155126607,
+        "hi": 0.6830601705342013,
+        "n": 251
+      },
+      "uncertain&agree": {
+        "wrong": 0.5673575129533679,
+        "lo": 0.5175074134840366,
+        "hi": 0.6158800956991805,
+        "n": 386
+      }
+    },
+    "lift": 0.42297300842011387,
+    "validates_criteria": true
+  },
+  "primary_verdict": "VALIDATES \u2014 model-portable triage flag"
+}

@@ -1,0 +1,37 @@
+{
+  "_documentation": "Captured qwen2.5:7b-instruct outputs from docs/exploration/condition_c_end_to_end_2026-05-03.md. Used by integration tests as realistic-shape fixtures. The first entry (medqa-test-0) is verbatim from the dress rehearsal; remaining entries are programmatically constructed with the same response shape for orchestration coverage.",
+  "questions": [
+    {
+      "question_id": "medqa-test-0",
+      "initial_cot": "Reasoning step 1: The resident has made a surgical error by cutting the flexor tendon during carpal tunnel repair. This is a significant complication that could impact the patient's recovery and function.\n\nReasoning step 2: According to medical ethics and standards, it is essential to disclose all complications to patients, regardless of their severity or potential impact on outcomes. Withholding information can lead to mistrust and legal issues.\n\nReasoning step 3: The attending physician's suggestion to omit the complication from the operative report and not inform the patient goes against ethical guidelines and best practices in medical care.\n\nReasoning step 4: Reporting a colleague for unethical behavior, such as failing to disclose a significant surgical error, is an extreme measure that should be considered only if there are no other options. The resident should first address the issue with the attending physician directly.\n\nFinal answer: B",
+      "distributions": [
+        {"A": 0.4, "B": 0.3, "C": 0.1, "D": 0.2},
+        {"A": 0.6, "B": 0.2, "C": 0.05, "D": 0.15},
+        {"A": 0.6, "B": 0.2, "C": 0.05, "D": 0.15},
+        {"A": 0.65, "B": 0.2, "C": 0.05, "D": 0.1},
+        {"A": 0.6, "B": 0.25, "C": 0.05, "D": 0.1}
+      ]
+    },
+    {
+      "question_id": "synth-1",
+      "initial_cot": "Reasoning step 1: Consider the patient's symptoms.\n\nReasoning step 2: Apply diagnostic criteria.\n\nReasoning step 3: Eliminate alternatives.\n\nFinal answer: A",
+      "distributions": [
+        {"A": 0.25, "B": 0.25, "C": 0.25, "D": 0.25},
+        {"A": 0.5, "B": 0.2, "C": 0.15, "D": 0.15},
+        {"A": 0.65, "B": 0.15, "C": 0.1, "D": 0.1},
+        {"A": 0.8, "B": 0.1, "C": 0.05, "D": 0.05}
+      ]
+    },
+    {
+      "question_id": "synth-2",
+      "initial_cot": "Reasoning step 1: Patient presentation suggests cardiac etiology.\n\nReasoning step 2: ECG findings consistent with anterior MI.\n\nReasoning step 3: Cardiac biomarkers should be elevated.\n\nReasoning step 4: Treatment is reperfusion therapy.\n\nFinal answer: C",
+      "distributions": [
+        {"A": 0.2, "B": 0.3, "C": 0.4, "D": 0.1},
+        {"A": 0.1, "B": 0.2, "C": 0.6, "D": 0.1},
+        {"A": 0.05, "B": 0.1, "C": 0.8, "D": 0.05},
+        {"A": 0.05, "B": 0.05, "C": 0.85, "D": 0.05},
+        {"A": 0.05, "B": 0.05, "C": 0.85, "D": 0.05}
+      ]
+    }
+  ]
+}

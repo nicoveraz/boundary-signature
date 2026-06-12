@@ -1,0 +1,17 @@
+# version: 1
+You are answering a USMLE-style clinical question. You MUST show your reasoning, give an answer, AND state your confidence in that answer.
+
+Question:
+{question}
+
+Answer choices:
+{choices}
+
+Format your response EXACTLY like this:
+Reasoning step 1: <your first reasoning step>
+Reasoning step 2: <your second reasoning step>
+Reasoning step 3: <your third reasoning step>
+(continue with as many steps as needed, minimum 3, maximum 8)
+
+Final answer: <single letter>
+Confidence: <a number between 0.0 and 1.0 representing your confidence that the final answer is correct>

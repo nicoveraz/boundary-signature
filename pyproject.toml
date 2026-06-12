@@ -1,0 +1,116 @@
+[project]
+name = "boundary-signature"
+version = "0.1.0"
+description = "A measurement protocol for per-step belief monitoring in chain-of-thought reasoning (MCQ research release)"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Quetru Ltda." }]
+keywords = [
+    "uncertainty-quantification",
+    "chain-of-thought",
+    "selective-prediction",
+    "calibration",
+    "large-language-models",
+]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "numpy>=1.26",
+    "scipy>=1.13",
+    "networkx>=3.2",
+    "pandas>=2.2",
+    "pyarrow>=15.0",
+    "pydantic>=2.6",
+    "scikit-learn>=1.4",
+]
+
+[project.optional-dependencies]
+faiss = ["faiss-cpu>=1.8"]
+openai = ["openai>=1.40"]
+ollama = ["httpx>=0.27"]
+llama_cpp = ["httpx>=0.27"]
+sentence-transformers = ["sentence-transformers>=3.0"]
+medqa = ["datasets>=2.18"]
+mlx = ["mlx-lm>=0.31"]
+experiments = [
+    "tenacity>=8.2",
+    "tqdm>=4.66",
+    "matplotlib>=3.8",
+    "python-dotenv>=1.0",
+]
+all = [
+    "boundary-signature[faiss,openai,ollama,llama_cpp,mlx,sentence-transformers,medqa,experiments]",
+]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "ruff>=0.5",
+    "mypy>=1.10",
+    "import-linter>=2.0",
+    "ipykernel>=6.29",
+    "pandas-stubs>=2.2",
+    "types-networkx>=3.2",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/bsig"]
+
+[tool.hatch.build.targets.wheel.shared-data]
+"src/bsig/medqa/prompts" = "bsig/medqa/prompts"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "SIM", "RUF"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+
+[[tool.mypy.overrides]]
+module = [
+    "bsig.medqa.*",
+    "bsig.reference.*",
+]
+strict = false
+
+# bsig.core.graph is pandas-heavy. pandas-stubs returns broad unions
+# (e.g., str|bytes|date|complex|...) for cell access and itertuples
+# fields, which fight unhelpfully with int()/float()/bool() narrowing.
+# Disable the pandas-induced error codes for this file only; strict
+# typing remains in force for everything else in core and adapters.
+[[tool.mypy.overrides]]
+module = ["bsig.core.graph"]
+disable_error_code = ["arg-type", "operator", "assignment"]
+
+# faiss-cpu ships without type stubs or a py.typed marker. Treat as Any.
+[[tool.mypy.overrides]]
+module = ["faiss"]
+ignore_missing_imports = true
+
+# scipy.stats has no stubs that mypy picks up by default.
+[[tool.mypy.overrides]]
+module = ["scipy.*"]
+ignore_missing_imports = true
+
+# scikit-learn ships without a py.typed marker.
+[[tool.mypy.overrides]]
+module = ["sklearn.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"

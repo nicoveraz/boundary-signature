@@ -1,0 +1,10 @@
+# version: 1
+The previous response did not match the required format. Please re-output your response, strictly following the format below.
+
+ORIGINAL REQUEST:
+{original_prompt}
+
+YOUR PREVIOUS RESPONSE:
+{malformed_output}
+
+Please re-output your response now, strictly matching the format specified in the original request. Do not include any preamble, explanation of the previous mistake, or commentary — only the formatted response.

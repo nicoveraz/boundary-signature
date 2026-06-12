@@ -1,0 +1,14 @@
+# version: 2
+You are answering a USMLE-style clinical question. Show your reasoning step-by-step. Each reasoning step should be a distinct logical move (consider symptoms, identify the pattern, apply diagnostic criteria, eliminate alternatives, etc.).
+
+Question:
+{question}
+
+Answer choices:
+{choices}
+
+Format your response EXACTLY like this:
+Reasoning step 1: <your first reasoning step>
+Reasoning step 2: <your second reasoning step>
+Reasoning step 3: <your third reasoning step>
+(continue with as many steps as needed; aim for 3-5 steps total)

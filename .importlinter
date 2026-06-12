@@ -1,0 +1,29 @@
+[importlinter]
+root_package = bsig
+
+[importlinter:contract:1]
+name = core does not depend on any other layer
+type = forbidden
+source_modules =
+    bsig.core
+forbidden_modules =
+    bsig.adapters
+    bsig.medqa
+    bsig.reference
+
+[importlinter:contract:2]
+name = adapters do not depend on domain packs or reference impls
+type = forbidden
+source_modules =
+    bsig.adapters
+forbidden_modules =
+    bsig.medqa
+    bsig.reference
+
+[importlinter:contract:3]
+name = reference implementations do not depend on domain packs
+type = forbidden
+source_modules =
+    bsig.reference
+forbidden_modules =
+    bsig.medqa

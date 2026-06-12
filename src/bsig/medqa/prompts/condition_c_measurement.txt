@@ -1,0 +1,8 @@
+# version: 1
+Question:
+{question}
+
+Answer choices:
+{choices}
+
+{reasoning_so_far}The best answer is
