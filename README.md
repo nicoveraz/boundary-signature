@@ -17,21 +17,41 @@ full top-K logprobs, and derives per-trajectory scorers — chiefly
 - **It is** the reproducibility artifact for the methods paper: the framework
   (`bsig`), the MedQA/MMLU experiment pipeline, the pre-registration trail, and
   the cached measurements needed to recompute every published number.
-- **It is not** a production uncertainty service. Eunosia's deployed
-  uncertainty/calibration stack (`eunosia-uncertainty`) and clinical domain
-  pack are separate and closed. Nothing here depends on them; nothing here
-  exposes them.
+- **It is not** a production uncertainty service.
 
 ## Headline result
 
 On MedQA-USMLE (N=1273) `mean_entropy` reaches sign-aware AUC **0.686
 [0.657, 0.716]** against the wrong-answer indicator, replicating cross-domain
-on MMLU professional_law (N=1534) at **0.664 [0.636, 0.690]**. A systematic
-sweep (paper §5.7–5.8) shows that — under single-model, single-run, 4-bit,
-black-box constraints — no cheap trajectory-dynamics, perturbation, verbalised-
-confidence, or richer-distribution feature complements `mean_entropy`; the only
-additive gain comes from cross-quantization disagreement, which is itself
-label-sensitive. The negative-results map is part of the contribution.
+on MMLU professional_law (N=1534) at **0.664 [0.636, 0.690]**.
+
+The signal is present before the model writes a single reasoning token:
+eventually-wrong answers start with much higher entropy over the answer
+options, and the gap narrows as reasoning resolves.
+
+![Median answer entropy per reasoning step, correct vs wrong (MedQA N=1273)](docs/figures/entropy_trajectory.png)
+
+*(regenerate with `python experiments/medqa_generalization/scripts/make_figure_entropy_trajectory.py`)*
+
+### What we tested, and what actually helps
+
+A systematic sweep — every signal is cheap (single model, single forward pass,
+black-box) and tested for incremental AUC over `mean_entropy`:
+
+| Signal | Standalone AUC | Adds over `mean_entropy`? |
+|---|---|---|
+| **`mean_entropy`** (mean per-step answer entropy) | **0.686** | — *this is the signal* |
+| Cross-quantization disagreement | additive | **+0.031** — but needs a 2nd model, and label-sensitive |
+| Trajectory dynamics (volatility · argmax flips · monotonicity · margin) | ≤ 0.68 | no (all CIs include 0) |
+| Verbalised confidence (ask the model) | 0.541 | no |
+| Logit-noise perturbation (one model) | — | no (it re-encodes entropy) |
+| Varentropy · full-vocab entropy · entropy-production rate | ≤ 0.67 | no |
+
+Under these constraints the cheap single-pass ceiling is ≈0.69 AUC, reached by
+`mean_entropy` alone. The only additive gain (cross-quantization disagreement)
+requires a second quantized model and its gain attenuates on the deployed
+prediction. **The negative-results map is part of the contribution** — every
+row is pre-registered or run as an explicit exploratory probe (paper §5.7–5.8).
 
 ## Reproduce without an LLM (measurement vs computation)
 
