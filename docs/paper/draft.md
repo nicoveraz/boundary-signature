@@ -358,8 +358,11 @@ including three additional Phase-C semantic-entropy predictions.
 
 ## 2. Related work
 
-(Drafted at outline level here; substantive expansion in a future
-revision.)
+This section situates the framework against five neighbouring lines of
+work: confidence calibration, sequence- and token-level uncertainty,
+perturbation-based estimation, trajectory-dynamics uncertainty, and
+diagnostic-decomposition frameworks. Full references are listed in the
+References section.
 
 **Confidence calibration.** Verbalised-confidence elicitation —
 asking the model to report a probability or confidence score
@@ -593,6 +596,15 @@ steps, the protocol is invoked *k+2* times: once at the prior
 terminal answer position. Each invocation produces a
 ``TokenProbabilityResult`` that becomes a state in the trajectory
 data model (§3.4).
+
+![Figure 1](../figures/protocol.png)
+
+**Figure 1.** The measurement protocol. A chain-of-thought generation is
+read at each reasoning-step boundary; at each position the model's
+distribution over the answer options A/B/C/D is recorded (it typically
+sharpens as reasoning resolves). The resulting trajectory of distributions
+is reduced to per-trajectory scorers — chiefly ``mean_entropy`` — that
+serve as the deferral signal.
 
 ### 3.2 Renormalisation and mass capture
 
@@ -1023,9 +1035,9 @@ median entropy stratified by correct/wrong:
 | 4 | 730 | 0.050 | 729 | 0.196 | +0.146 |
 | 5 | 534 | 0.024 | 527 | 0.072 | +0.048 |
 
-![Figure 1](../figures/entropy_trajectory.png)
+![Figure 2](../figures/entropy_trajectory.png)
 
-**Figure 1.** Median per-step answer entropy on MedQA-USMLE (N=1273),
+**Figure 2.** Median per-step answer entropy on MedQA-USMLE (N=1273),
 stratified by eventual correctness. The wrong–correct gap is largest at
 the prior (step 0; +0.48 bits) and narrows monotonically as reasoning
 resolves — the same phenomenon the table above reports on
@@ -1288,9 +1300,9 @@ zero, and it requires a second quantized model.
 | Verbalised confidence | −0.001 | [−0.003, +0.001] |
 | Richer distribution (varentropy / full-vocab / EPR) | −0.016 | [−0.035, +0.000] |
 
-![Figure 2](../figures/signal_map.png)
+![Figure 3](../figures/signal_map.png)
 
-**Figure 2.** Incremental AUC over ``mean_entropy`` for each cheap signal
+**Figure 3.** Incremental AUC over ``mean_entropy`` for each cheap signal
 in Table 6. Bars are point estimates; whiskers are 95% CIs. Only
 cross-quantization disagreement (highlighted) clears zero; every other
 interval straddles it, and the richest-distribution composite is slightly
@@ -2110,3 +2122,71 @@ exploratory quadrant observation → pre-registered operationalization
 
 The git log (``git log --grep "pre-registered"``) records each
 commit. Revisions are visible in the diffs.
+
+---
+
+## References
+
+*Each entry is anchored to its arXiv identifier or published venue (the
+ground-truth locators). Author lists and final titles for 2025–2026
+preprints should be verified against arXiv before camera-ready.*
+
+1. Farquhar, S., Kuhn, L., Gal, Y., et al. (2024). Detecting hallucinations
+   in large language models using semantic entropy. *Nature*, 630.
+2. Kuhn, L., Gal, Y., & Farquhar, S. (2023). Semantic Uncertainty:
+   Linguistic Invariances for Uncertainty Estimation in Natural Language
+   Generation. *ICLR*.
+3. Wang, X., Wei, J., Schuurmans, D., et al. (2023). Self-Consistency
+   Improves Chain of Thought Reasoning in Language Models. *ICLR*.
+4. Malinin, A., & Gales, M. (2021). Uncertainty Estimation in
+   Autoregressive Structured Prediction. *ICLR*.
+5. Tian, K., Mitchell, E., Zhou, A., et al. (2023). Just Ask for
+   Calibration: Strategies for Eliciting Calibrated Confidence Scores from
+   Language Models. *EMNLP*.
+6. Lin, S., Hilton, J., & Evans, O. (2022). Teaching Models to Express
+   Their Uncertainty in Words. *TMLR*.
+7. Kadavath, S., Conerly, T., Askell, A., et al. (2022). Language Models
+   (Mostly) Know What They Know. arXiv:2207.05221.
+8. Gao, X., et al. (2024). SPUQ: Perturbation-Based Uncertainty
+   Quantification for Large Language Models. *EACL*. arXiv:2403.02509.
+9. Fadeeva, E., et al. (2023). LM-Polygraph: Uncertainty Estimation for
+   Language Models. *EMNLP (System Demonstrations)*.
+10. Recht, B., Roelofs, R., Schmidt, L., & Shankar, V. (2019). Do ImageNet
+    Classifiers Generalize to ImageNet? *ICML*.
+11. Forde, J. Z., & Paganini, M. (2019). The Scientific Method in the
+    Science of Machine Learning. arXiv:1904.10922.
+12. Hu, Q., et al. (2022). Characterizing and Understanding the Behavior of
+    Quantized Models for Reliable Deployment. arXiv:2204.04220.
+13. Bigelow, E., et al. (2024). Forking Paths in Neural Text Generation.
+    arXiv:2412.07961.
+14. Proskurina, I., et al. (2024). On the impact of quantization on the
+    confidence and calibration of LLMs. *NAACL Findings*. arXiv:2405.00632.
+15. Zhao, et al. (2026). Entropy-trajectory shape predicts chain-of-thought
+    reasoning reliability. arXiv:2603.18940.
+16. Hamidieh, K., et al. (2025). Aleatoric and epistemic uncertainty
+    decomposition for LLMs (total uncertainty = AU + EU). *NeurIPS
+    Workshop*. arXiv:2604.17112.
+17. Gorbett, M., & Jana, S. (2026). Cross-model disagreement as a
+    correctness indicator. arXiv:2603.25450.
+18. Hua, Lotfi, & Chen (2026). Quantization-induced output flipping and
+    predictive uncertainty in LLMs. arXiv:2602.06181.
+19. Taparia, et al. (2026). Anatomy of Uncertainty in Large Language
+    Models. arXiv:2603.24967.
+20. Cecere, et al. (2025). Monte Carlo Temperature for LLM uncertainty
+    quantification.
+21. Inv-Entropy: inverse-model perturbation uncertainty (2025). *NeurIPS*.
+    arXiv:2506.09684.
+22. EDIS: Entropy Dynamics Instability Score (2026). arXiv:2602.01288.
+23. Step-to-step belief volatility for chain-of-thought reliability (2026).
+    arXiv:2602.02863.
+24. RCC: Recurrent Confidence Chain (2026). arXiv:2601.13368.
+25. Certaindex: probe-in-the-middle answer stability (2024).
+    arXiv:2412.20993.
+26. ES-CoT / Answer Convergence Ratio (2025). arXiv:2506.02536.
+27. Semantic Energy (2025). arXiv:2508.14496.
+28. EPR: Entropy Production Rate for hallucination detection (2026).
+    arXiv:2509.04492.
+29. HaluNet (2025). arXiv:2512.24562.
+30. LogitScope: entropy and varentropy in a single forward pass (2026).
+31. ConfiDx: an uncertainty-aware fine-tuned clinical LLM (2025).
+32. UncertaintyZoo: a library of uncertainty-estimation methods (2025).
