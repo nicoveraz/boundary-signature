@@ -1,5 +1,7 @@
 # boundary-signature
 
+[![DOI](https://zenodo.org/badge/1267553989.svg)](https://doi.org/10.5281/zenodo.20672237)
+
 A token-probability **measurement protocol** for per-step belief monitoring in
 chain-of-thought (CoT) reasoning, with a deferral/selective-prediction
 evaluation harness. This is the research code and data behind the paper
@@ -104,4 +106,15 @@ Apache-2.0. See [`LICENSE`](LICENSE).
 
 ## Citation
 
-Citation metadata will be added on publication; for now cite the repository.
+Archived on Zenodo: **https://doi.org/10.5281/zenodo.20672237**
+
+```bibtex
+@software{verazuniga_boundary_signature,
+  author    = {Vera Zúñiga, Nicolás},
+  title     = {boundary-signature: A Measurement Protocol for Per-Step
+               Belief Monitoring in Chain-of-Thought Reasoning},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.20672237},
+  url       = {https://doi.org/10.5281/zenodo.20672237}
+}
+```

@@ -5,10 +5,15 @@ authors:
   - family-names: "Vera Zúñiga"
     given-names: "Nicolás"
     affiliation: "Quetru Ltda."
-version: 0.1.0
+version: 0.1.1
 date-released: "2026-06-12"
 license: Apache-2.0
+doi: 10.5281/zenodo.20672237
 repository-code: "https://github.com/nicoveraz/boundary-signature"
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.20672237
+    description: Zenodo concept DOI (all versions)
 keywords:
   - uncertainty quantification
   - chain-of-thought
