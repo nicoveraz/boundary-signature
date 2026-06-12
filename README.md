@@ -38,6 +38,10 @@ options, and the gap narrows as reasoning resolves.
 A systematic sweep — every signal is cheap (single model, single forward pass,
 black-box) and tested for incremental AUC over `mean_entropy`:
 
+![Incremental AUC over mean_entropy for every cheap signal tested; only cross-quantization disagreement clears zero](docs/figures/signal_map.png)
+
+*(regenerate with `python experiments/medqa_generalization/scripts/make_figure_signal_map.py`)*
+
 | Signal | Standalone AUC | Adds over `mean_entropy`? |
 |---|---|---|
 | **`mean_entropy`** (mean per-step answer entropy) | **0.686** | — *this is the signal* |
