@@ -2,7 +2,7 @@
 
 **Status**: full draft, all sections (§1-§9) populated; pending PI
 review pass and venue formatting.
-**Authors**: Nicolás Vera Zúñiga (Quetru Ltda.). Co-authors TBD.
+**Author**: Nicolás Vera Zúñiga (Quetru Ltda.).
 **Date**: 2026-05-07 (started); 2026-06-12 (full-draft revision
 integrating the parallel-axis and signal-exhaustion results).
 **Empirical evidence base**: stage-4a MedQA-USMLE N=1273 replication
